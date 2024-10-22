@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Text, View, StyleSheet, Dimensions } from "react-native";
 import { DraxSnapbackTargetPreset, DraxView } from "react-native-drax";
 import Card from "./Card";
@@ -9,6 +9,7 @@ interface Card {
   id: number;
   content: string;
   correctColumnId: number;
+  isCorrect?: boolean;
 }
 
 type ColumnProp = {
@@ -20,7 +21,6 @@ type ColumnProp = {
 const { height, width } = Dimensions.get("window");
 
 export default function Column({ columnId, name, cards }: ColumnProp) {
-  const [columnData, setColumnData] = useState(cards);
   const [isDragOver, setIsDragOver] = useState(false);
   const { updateCardColumn } = useCardContext();
 
@@ -44,13 +44,14 @@ export default function Column({ columnId, name, cards }: ColumnProp) {
           return DraxSnapbackTargetPreset.None;
         }}
       >
-        {columnData.map((card) => (
+        {cards.map((card) => (
           <Card
             key={card.id}
             cardID={card.id}
             content={card.content}
             correctColumnId={card.correctColumnId}
             style={styles.columnCard}
+            isCorrect={card.isCorrect}
           />
         ))}
       </DraxView>

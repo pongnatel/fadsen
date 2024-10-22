@@ -1,4 +1,10 @@
-import React, { createContext, useState, useContext, ReactNode } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  useEffect,
+} from "react";
 import initialData from "../data/initialData";
 
 // Card interface definition
@@ -6,6 +12,7 @@ interface Card {
   id: number;
   content: string;
   correctColumnId: number;
+  currentColumnId?: number;
 }
 
 interface ColumnData {
@@ -21,6 +28,7 @@ interface CardContextType {
   removeCard: (cardId: number) => void;
   resetCards: () => void; // Function to reset cards
   //   checkCardPlacements: () => void; // Function to check placements
+  handleSubmit: () => void;
   updateCardColumn: (cardId: number, columnId: number) => void; // Function to update card's column
 }
 
@@ -105,6 +113,28 @@ export const CardProvider: React.FC<CardProviderProps> = ({ children }) => {
     );
   };
 
+  const handleSubmit = () => {
+    console.log("Submit");
+    let updatedColumns = columns.map((col) => {
+      // Update each card in the column
+      const updatedCards = col.cards.map((card) => {
+        if (card.currentColumnId !== card.correctColumnId) {
+          // Return the modified card with 'isCorrect: false'
+          return { ...card, isCorrect: false };
+        } else {
+          // Return the card with 'isCorrect: true'
+          return { ...card, isCorrect: true };
+        }
+      });
+
+      // Return the updated column with the new card array
+      return { ...col, cards: updatedCards };
+    });
+
+    // Now you can use updatedColumns to update your state
+    setColumns(updatedColumns);
+  };
+
   return (
     <CardContext.Provider
       value={{
@@ -113,6 +143,7 @@ export const CardProvider: React.FC<CardProviderProps> = ({ children }) => {
         resetCards,
         updateCardColumn,
         removeCard,
+        handleSubmit,
       }}
     >
       {children}

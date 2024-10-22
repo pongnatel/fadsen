@@ -13,6 +13,7 @@ type CardProps = {
   cardID: number;
   content: string | null;
   correctColumnId: number;
+  isCorrect?: boolean;
   style?: StyleProp<ViewStyle>;
 };
 
@@ -24,13 +25,21 @@ export default function Card({
   content,
   correctColumnId,
   style,
+  isCorrect,
 }: CardProps) {
-  const { initialBoard, removeCard } = useCardContext();
+  const { removeCard } = useCardContext();
+
+  const cardStyle =
+    isCorrect === undefined
+      ? {} // No style if 'isCorrect' is not defined
+      : isCorrect
+      ? styles.correct // Apply correct style
+      : styles.incorrect; // Apply incorrect style
 
   return (
     <DraxView
       id={cardID.toString()}
-      style={[styles.card, style]}
+      style={[styles.card, style, cardStyle]}
       onDragStart={() => {
         console.log("start drag");
       }}
@@ -72,5 +81,11 @@ const styles = StyleSheet.create({
   },
   dragging: {
     backgroundColor: "#D2D4D1", // Color when dragging
+  },
+  correct: {
+    backgroundColor: "green",
+  },
+  incorrect: {
+    backgroundColor: "red",
   },
 });
