@@ -13,6 +13,7 @@ interface Card {
   content: string;
   correctColumnId: number;
   currentColumnId?: number;
+  isCorrect?: boolean;
 }
 
 interface ColumnData {
@@ -30,6 +31,8 @@ interface CardContextType {
   //   checkCardPlacements: () => void; // Function to check placements
   handleSubmit: () => void;
   updateCardColumn: (cardId: number, columnId: number) => void; // Function to update card's column
+  isWin: boolean;
+  setIsWin: (isWin: boolean) => void;
 }
 
 // Creating the context
@@ -62,6 +65,14 @@ export const CardProvider: React.FC<CardProviderProps> = ({ children }) => {
 
   const [initialBoard, setInitialBoard] = useState<Card[]>(initialData.cards);
   const [columns, setColumns] = useState<ColumnData[]>(initialColumns);
+  const [isWin, setIsWin] = useState(false);
+  const areAllCardsCorrect = (columns: ColumnData[]): boolean => {
+    // Loop through each column
+    return columns.every((column) =>
+      // Check if all cards in the column are correct
+      column.cards.every((card) => card.isCorrect)
+    );
+  };
 
   // Function to add a new card
   const addCard = (newCard: Card) => {
@@ -79,6 +90,7 @@ export const CardProvider: React.FC<CardProviderProps> = ({ children }) => {
   const resetCards = () => {
     setInitialBoard(initialData.cards); // Reset to an empty array (or you can set a default value here)
     setColumns(initialColumns);
+    setIsWin(false);
     console.log("Reset");
   };
 
@@ -133,6 +145,11 @@ export const CardProvider: React.FC<CardProviderProps> = ({ children }) => {
 
     // Now you can use updatedColumns to update your state
     setColumns(updatedColumns);
+
+    if (initialBoard.length != 0) return;
+    const allCorrect = areAllCardsCorrect(updatedColumns);
+    console.log(allCorrect);
+    setIsWin(allCorrect);
   };
 
   return (
@@ -144,6 +161,8 @@ export const CardProvider: React.FC<CardProviderProps> = ({ children }) => {
         updateCardColumn,
         removeCard,
         handleSubmit,
+        isWin,
+        setIsWin,
       }}
     >
       {children}
