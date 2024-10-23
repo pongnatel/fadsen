@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Dimensions } from "react-native";
 import { DraxSnapbackTargetPreset, DraxView } from "react-native-drax";
 import Card from "./Card";
 import { useCardContext } from "../context/CardContext";
+import { panGestureHandlerCustomNativeProps } from "react-native-gesture-handler/lib/typescript/handlers/PanGestureHandler";
 
 // Define the type for a single card
 interface Card {
@@ -22,7 +23,7 @@ const { height, width } = Dimensions.get("window");
 
 export default function Column({ columnId, name, cards }: ColumnProp) {
   const [isDragOver, setIsDragOver] = useState(false);
-  const { updateCardColumn } = useCardContext();
+  const { updateCardColumn, removeCard } = useCardContext();
 
   return (
     <View style={styles.container}>
@@ -38,6 +39,12 @@ export default function Column({ columnId, name, cards }: ColumnProp) {
           setIsDragOver(false); // Revert color when drag leaves
         }}
         onReceiveDragDrop={({ dragged: { payload } }) => {
+          const cardExists = cards.some((card) => card.id === payload.cardID);
+          if (cardExists) {
+            setIsDragOver(false);
+            return DraxSnapbackTargetPreset.None;
+          }
+          removeCard(payload.cardID);
           updateCardColumn(payload.cardID, columnId);
           setIsDragOver(false);
           console.log(payload);

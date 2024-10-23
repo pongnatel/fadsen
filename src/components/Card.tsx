@@ -40,15 +40,13 @@ export default function Card({
     <DraxView
       id={cardID.toString()}
       style={[styles.card, style, cardStyle]}
-      onDragStart={() => {
-        console.log("start drag");
-      }}
+      onDragStart={(arg) => {}}
       onDragEnd={(arg) => {
-        console.log("Parent id: ", arg.dragged.parentId);
         return DraxSnapbackTargetPreset.None;
       }}
-      onDragDrop={() => {
-        removeCard(cardID);
+      onDragDrop={(arg) => {}}
+      onReceiveDragDrop={() => {
+        return DraxSnapbackTargetPreset.None;
       }}
       draggingStyle={styles.dragging}
       payload={{ cardID, content, correctColumnId }}
