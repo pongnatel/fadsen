@@ -59,7 +59,6 @@ export default function Card({
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#fff",
-    padding: 10,
     margin: 10,
     borderRadius: 5,
     shadowColor: "#000",
@@ -73,9 +72,8 @@ const styles = StyleSheet.create({
     justifyContent: "center", // Center vertically
   },
   content: {
-    fontSize: 25,
+    fontSize: width * 0.015,
     fontWeight: "bold",
-    marginBottom: 10,
   },
   dragging: {
     backgroundColor: "#D2D4D1", // Color when dragging
