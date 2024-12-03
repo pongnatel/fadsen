@@ -4,6 +4,7 @@
     "slug": "fadsen",
     "version": "1.0.0",
     "orientation": "default",
+    "newArchEnabled": false,
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -12,16 +13,23 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.pongnatel.fadsen"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.pongnatel.fadsen"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e9bad148-3ea2-4194-ac1b-7f07202d10c0"
+      }
     }
   }
 }
