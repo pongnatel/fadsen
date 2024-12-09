@@ -21,14 +21,8 @@ const background = { uri: "../assets/fadsen/game 1.png" };
 
 export default function Main() {
   const { isWin, setIsWin } = useCardContext();
-
-  useEffect(() => {
-    // Hide the status bar
-    StatusBar.setHidden(true);
-  }, []);
-
   return (
-    <SafeAreaView style={styles.safeContainer}>
+    <View style={styles.safeContainer}>
       {/* {isWin && (
         <Modal transparent>
           <LottieView
@@ -71,7 +65,7 @@ export default function Main() {
           <ColumnBoard></ColumnBoard>
         </ImageBackground>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -82,11 +76,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // paddingTop: Platform.OS === "android" ? 60 : 0,
-    gap: 30,
   },
   background: {
     flex: 1,
-    justifyContent: "center",
   },
   imageLogo: {
     width: 180,
