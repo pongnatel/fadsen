@@ -7,18 +7,29 @@ import {
   Platform,
   Text,
   Modal,
+  Image,
+  ImageBackground,
+  StatusBar,
 } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InitialBoard from "./components/InitialBoard";
 import ColumnBoard from "./components/ColumnBoard";
 import LottieView from "lottie-react-native";
 import { useCardContext } from "./context/CardContext";
 
+const background = { uri: "../assets/fadsen/game 1.png" };
+
 export default function Main() {
   const { isWin, setIsWin } = useCardContext();
+
+  useEffect(() => {
+    // Hide the status bar
+    StatusBar.setHidden(true);
+  }, []);
+
   return (
     <SafeAreaView style={styles.safeContainer}>
-      {isWin && (
+      {/* {isWin && (
         <Modal transparent>
           <LottieView
             source={require("../assets/congrats.json")}
@@ -37,13 +48,28 @@ export default function Main() {
             autoPlay
           />
         </Modal>
-      )}
+      )} */}
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>FADSEN</Text>
-        </View>
-        <InitialBoard></InitialBoard>
-        <ColumnBoard></ColumnBoard>
+        <ImageBackground
+          source={require("../assets/fadsen/background.png")}
+          resizeMode="cover"
+          style={styles.background}
+        >
+          <View style={styles.header}>
+            {/* <Text style={styles.headerText}>FADSEN</Text> */}
+            <Image
+              source={require("../assets/fadsen/logo.png")}
+              style={styles.imageLogo}
+              resizeMode="contain"
+            />
+            <Image
+              source={require("../assets/fadsen/game1.png")}
+              style={styles.imageTitle}
+            />
+          </View>
+          <InitialBoard></InitialBoard>
+          <ColumnBoard></ColumnBoard>
+        </ImageBackground>
       </View>
     </SafeAreaView>
   );
@@ -55,13 +81,30 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: Platform.OS === "android" ? 50 : 0,
+    // paddingTop: Platform.OS === "android" ? 60 : 0,
     gap: 30,
   },
+  background: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  imageLogo: {
+    width: 180,
+  },
+  imageTitle: {
+    width: 180,
+    resizeMode: "contain",
+    position: "absolute",
+    left: "50%",
+    transform: [{ translateX: -90 }], // Centers the image
+  },
   header: {
-    backgroundColor: "#232323",
-    alignItems: "center", // Center horizontally
-    justifyContent: "center", // Center vertically
+    backgroundColor: "#FF00AB",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    height: 100,
   },
   headerText: {
     fontSize: 50,
@@ -77,3 +120,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#87CEEB", // Color during drag over
   },
 });
+function useNavigationBar(arg0: { color: string; hide: boolean }) {
+  throw new Error("Function not implemented.");
+}
