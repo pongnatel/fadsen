@@ -85,20 +85,20 @@ export default function Column({ columnId, cards }: ColumnProp) {
 
 const styles = StyleSheet.create({
   container: {
-    width: width * 0.25,
-    height: height * 0.5,
+    width: width * 0.23,
+    height: height * 0.45,
   },
   contentContainer: {
     flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 5,
-    paddingTop: 60,
+    rowGap: 10,
+    paddingTop: "20%",
     justifyContent: "space-evenly",
   },
   columnCard: {
-    height: 120,
-    width: 130,
+    height: 110,
+    width: 120,
   },
   dragOver: {
     backgroundColor: "#87CEEB", // Color during drag over

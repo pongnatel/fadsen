@@ -10,6 +10,7 @@ import {
   Image,
   ImageBackground,
   StatusBar,
+  Pressable,
 } from "react-native";
 import { useEffect, useState } from "react";
 import InitialBoard from "./components/InitialBoard";
@@ -20,7 +21,7 @@ import { useCardContext } from "./context/CardContext";
 const background = { uri: "../assets/fadsen/game 1.png" };
 
 export default function Main() {
-  const { isWin, setIsWin } = useCardContext();
+  const { isWin, setIsWin, resetCards } = useCardContext();
   return (
     <SafeAreaView style={styles.safeContainer}>
       <StatusBar hidden={true} />
@@ -52,11 +53,13 @@ export default function Main() {
         >
           <View style={styles.header}>
             {/* <Text style={styles.headerText}>FADSEN</Text> */}
-            <Image
-              source={require("../assets/fadsen/logo.png")}
-              style={styles.imageLogo}
-              resizeMode="contain"
-            />
+            <Pressable onPress={() => resetCards()}>
+              <Image
+                source={require("../assets/fadsen/logo.png")}
+                style={styles.imageLogo}
+                resizeMode="contain"
+              />
+            </Pressable>
             <Image
               source={require("../assets/fadsen/game1.png")}
               style={styles.imageTitle}
@@ -68,13 +71,13 @@ export default function Main() {
             source={require("../assets/fadsen/butterfly.png")}
             resizeMode="contain"
             style={{
-              backgroundColor: "red",
-              height: 400,
-              width: 400,
+              height: 250,
+              width: 250,
+              alignSelf: "center",
               position: "absolute",
               bottom: 0,
               left: 0,
-              // transform: [{ translateX: -100 }, { translateY: 70 }],
+              transform: [{ translateX: -40 }, { translateY: 40 }],
             }}
           />
         </ImageBackground>

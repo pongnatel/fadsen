@@ -71,7 +71,7 @@ export default function Card({
       {imageSource && (
         <Image
           source={imageSource} // Pass the preloaded static path
-          style={{ height: 120, width: 130 }}
+          style={{ height: 110, width: 120 }}
         />
       )}
     </DraxView>
@@ -80,7 +80,6 @@ export default function Card({
 
 const styles = StyleSheet.create({
   card: {
-    // backgroundColor: "pink",
     alignItems: "center", // Center horizontally
     justifyContent: "center", // Center vertically
   },

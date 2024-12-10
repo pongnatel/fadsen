@@ -68,9 +68,11 @@ export default function InitialBoard() {
 
 const styles = StyleSheet.create({
   initialContainer: {
-    minHeight: height * 0.15,
+    height: height * 0.3,
+    paddingHorizontal: 200,
+    columnGap: 20,
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
   },
 });

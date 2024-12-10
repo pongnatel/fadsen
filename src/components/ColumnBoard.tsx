@@ -27,14 +27,6 @@ export default function ColumnBoard() {
         ))}
       </DraxView>
       <View style={styles.buttonContainer}>
-        <Pressable
-          style={styles.resetButton}
-          onPress={() => {
-            resetCards();
-          }}
-        >
-          <Text style={styles.resetText}>RESET</Text>
-        </Pressable>
         <Pressable style={styles.submitButton} onPress={() => handleSubmit()}>
           <Text style={styles.submitText}>SUBMIT</Text>
         </Pressable>
