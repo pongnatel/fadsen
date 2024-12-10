@@ -71,7 +71,7 @@ export default function Card({
       {imageSource && (
         <Image
           source={imageSource} // Pass the preloaded static path
-          style={{ height: 110, width: 120 }}
+          style={{ height: 120, width: 130 }}
         />
       )}
     </DraxView>
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   dragging: {
-    backgroundColor: "#D2D4D1", // Color when dragging
+    opacity: 0.5,
   },
   correct: {
     backgroundColor: "green",

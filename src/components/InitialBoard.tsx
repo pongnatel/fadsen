@@ -68,7 +68,8 @@ export default function InitialBoard() {
 
 const styles = StyleSheet.create({
   initialContainer: {
-    height: height * 0.3,
+    // backgroundColor: "red",
+    height: height * 0.33,
     paddingHorizontal: 200,
     columnGap: 20,
     flexDirection: "row",

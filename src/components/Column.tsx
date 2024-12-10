@@ -42,12 +42,12 @@ export default function Column({ columnId, cards }: ColumnProp) {
 
   return (
     <ImageBackground
-      style={styles.container}
+      style={[styles.container, isDragOver && styles.dragOver]}
       source={imageSource}
       resizeMode="contain"
     >
       <DraxView
-        style={[styles.contentContainer, isDragOver && styles.dragOver]}
+        style={[styles.contentContainer]}
         onReceiveDragOver={() => {
           setIsDragOver(true);
         }}
@@ -101,6 +101,6 @@ const styles = StyleSheet.create({
     width: 120,
   },
   dragOver: {
-    backgroundColor: "#87CEEB", // Color during drag over
+    opacity: 0.7,
   },
 });

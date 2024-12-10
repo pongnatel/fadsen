@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    gap: 15,
+    gap: 10,
   },
   imageLogo: {
     width: 140,
