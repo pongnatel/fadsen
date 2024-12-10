@@ -5,6 +5,7 @@ import {
   Dimensions,
   StyleProp,
   ViewStyle,
+  Image,
 } from "react-native";
 import { DraxSnapbackTargetPreset, DraxView } from "react-native-drax";
 import { useCardContext } from "../context/CardContext";
@@ -14,10 +15,23 @@ type CardProps = {
   content: string | null;
   correctColumnId: number;
   isCorrect?: boolean;
+  image: any;
   style?: StyleProp<ViewStyle>;
 };
 
 const { height, width } = Dimensions.get("window");
+
+const imageMap: Record<number, any> = {
+  1: require("../../assets/fadsen/influencers_idol_inspired.png"),
+  2: require("../../assets/fadsen/trend_seekers.png"),
+  3: require("../../assets/fadsen/fomo_shoppers.png"),
+  4: require("../../assets/fadsen/sale_promo_driven.png"),
+  5: require("../../assets/fadsen/eco_restrained.png"),
+  6: require("../../assets/fadsen/hoarding.png"),
+  7: require("../../assets/fadsen/convenience_time_saving_seekers.png"),
+  8: require("../../assets/fadsen/value_seekers.png"),
+  9: require("../../assets/fadsen/euphoria_chasers.png"),
+};
 
 // Define the Card component
 export default function Card({
@@ -25,9 +39,12 @@ export default function Card({
   content,
   correctColumnId,
   style,
+  image,
   isCorrect,
 }: CardProps) {
   const { removeCard } = useCardContext();
+
+  const imageSource = imageMap[cardID];
 
   const cardStyle =
     isCorrect === undefined
@@ -51,23 +68,20 @@ export default function Card({
       draggingStyle={styles.dragging}
       payload={{ cardID, content, correctColumnId }}
     >
-      <Text style={styles.content}>{content}</Text>
+      {imageSource && (
+        <Image
+          source={imageSource} // Pass the preloaded static path
+          style={{ height: 120, aspectRatio: 1 }}
+        />
+      )}
     </DraxView>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fff",
-    margin: 10,
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 3,
-    width: "30%",
-    height: "20%",
+    backgroundColor: "pink",
+    height: 120,
     alignItems: "center", // Center horizontally
     justifyContent: "center", // Center vertically
   },

@@ -10,6 +10,7 @@ interface Card {
   id: number;
   content: string;
   correctColumnId: number;
+  image: any;
   isCorrect?: boolean;
 }
 
@@ -58,6 +59,7 @@ export default function Column({ columnId, name, cards }: ColumnProp) {
             content={card.content}
             correctColumnId={card.correctColumnId}
             style={styles.columnCard}
+            image={card.image}
             isCorrect={card.isCorrect}
           />
         ))}

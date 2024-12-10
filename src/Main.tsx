@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 20,
+    marginTop: 20,
     height: 100,
   },
   headerText: {

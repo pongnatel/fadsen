@@ -13,6 +13,7 @@ interface Card {
   content: string;
   correctColumnId: number;
   currentColumnId?: number;
+  image: any;
   isCorrect?: boolean;
 }
 
