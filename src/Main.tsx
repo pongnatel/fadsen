@@ -64,6 +64,19 @@ export default function Main() {
           </View>
           <InitialBoard></InitialBoard>
           <ColumnBoard></ColumnBoard>
+          <Image
+            source={require("../assets/fadsen/butterfly.png")}
+            resizeMode="contain"
+            style={{
+              backgroundColor: "red",
+              height: 400,
+              width: 400,
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              // transform: [{ translateX: -100 }, { translateY: 70 }],
+            }}
+          />
         </ImageBackground>
       </View>
     </SafeAreaView>
@@ -82,14 +95,14 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   imageLogo: {
-    width: 180,
+    width: 140,
   },
   imageTitle: {
-    width: 180,
+    width: 160,
     resizeMode: "contain",
     position: "absolute",
     left: "50%",
-    transform: [{ translateX: -90 }], // Centers the image
+    transform: [{ translateX: -80 }], // Centers the image
   },
   header: {
     backgroundColor: "#FF00AB",
@@ -97,12 +110,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    height: 100,
-  },
-  headerText: {
-    fontSize: 50,
-    fontWeight: "bold",
-    color: "white",
+    height: 80,
   },
   receiver: {
     height: 300,
