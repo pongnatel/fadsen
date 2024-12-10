@@ -62,31 +62,15 @@ export default function InitialBoard() {
           />
         </DraxView> */}
       </View>
-      <Pressable
-        style={styles.resetButton}
-        onPress={() => {
-          resetCards();
-        }}
-      >
-        <Text style={styles.resetText}>Reset Button</Text>
-      </Pressable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   initialContainer: {
-    marginTop: 10,
+    minHeight: height * 0.15,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-evenly",
-  },
-  resetButton: {
-    backgroundColor: "yellow",
-    alignSelf: "center",
-    padding: 10,
-  },
-  resetText: {
-    fontSize: 40,
   },
 });

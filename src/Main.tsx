@@ -22,27 +22,28 @@ const background = { uri: "../assets/fadsen/game 1.png" };
 export default function Main() {
   const { isWin, setIsWin } = useCardContext();
   return (
-    <View style={styles.safeContainer}>
+    <SafeAreaView style={styles.safeContainer}>
+      <StatusBar hidden={true} />
       {/* {isWin && (
-        <Modal transparent>
-          <LottieView
-            source={require("../assets/congrats.json")}
-            style={{ width: "100%", height: "100%" }}
-            autoPlay
-            loop={false}
-            onAnimationFinish={() => setIsWin(false)}
-          />
-        </Modal>
-      )}
-      {isWin && (
-        <Modal transparent>
-          <LottieView
-            source={require("../assets/test.json")}
-            style={{ width: "100%", height: "100%" }}
-            autoPlay
-          />
-        </Modal>
-      )} */}
+          <Modal transparent>
+            <LottieView
+              source={require("../assets/congrats.json")}
+              style={{ width: "100%", height: "100%" }}
+              autoPlay
+              loop={false}
+              onAnimationFinish={() => setIsWin(false)}
+            />
+          </Modal>
+        )}
+        {isWin && (
+          <Modal transparent>
+            <LottieView
+              source={require("../assets/test.json")}
+              style={{ width: "100%", height: "100%" }}
+              autoPlay
+            />
+          </Modal>
+        )} */}
       <View style={styles.container}>
         <ImageBackground
           source={require("../assets/fadsen/background.png")}
@@ -65,7 +66,7 @@ export default function Main() {
           <ColumnBoard></ColumnBoard>
         </ImageBackground>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -75,10 +76,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // paddingTop: Platform.OS === "android" ? 60 : 0,
   },
   background: {
     flex: 1,
+    gap: 15,
   },
   imageLogo: {
     width: 180,
@@ -96,7 +97,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    marginTop: 20,
     height: 100,
   },
   headerText: {

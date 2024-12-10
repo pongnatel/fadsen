@@ -30,6 +30,14 @@
       "eas": {
         "projectId": "e9bad148-3ea2-4194-ac1b-7f07202d10c0"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/HelveticaNeueBold.otf"]
+        }
+      ]
+    ]
   }
 }

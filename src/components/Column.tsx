@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Text, View, StyleSheet, Dimensions } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Dimensions,
+  ImageBackground,
+} from "react-native";
 import { DraxSnapbackTargetPreset, DraxView } from "react-native-drax";
 import Card from "./Card";
 import { useCardContext } from "../context/CardContext";
@@ -22,15 +28,24 @@ type ColumnProp = {
 
 const { height, width } = Dimensions.get("window");
 
-export default function Column({ columnId, name, cards }: ColumnProp) {
+const columnMap: Record<number, any> = {
+  1: require("../../assets/fadsen/locker_emotional.png"),
+  2: require("../../assets/fadsen/locker_economical.png"),
+  3: require("../../assets/fadsen/locker_eco_conscious.png"),
+};
+
+export default function Column({ columnId, cards }: ColumnProp) {
   const [isDragOver, setIsDragOver] = useState(false);
   const { updateCardColumn, removeCard } = useCardContext();
 
+  const imageSource = columnMap[columnId];
+
   return (
-    <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>{name}</Text>
-      </View>
+    <ImageBackground
+      style={styles.container}
+      source={imageSource}
+      resizeMode="contain"
+    >
       <DraxView
         style={[styles.contentContainer, isDragOver && styles.dragOver]}
         onReceiveDragOver={() => {
@@ -64,40 +79,26 @@ export default function Column({ columnId, name, cards }: ColumnProp) {
           />
         ))}
       </DraxView>
-    </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: width * 0.3,
-    minHeight: height * 0.4,
-    flexDirection: "column",
-    borderWidth: 10, // Set the border width
-    borderTopWidth: 0,
-    borderColor: "#232323", // Set the border color
-  },
-  titleContainer: {
-    height: 100,
-    alignItems: "center", // Center horizontally
-    justifyContent: "center", // Center vertically
-    backgroundColor: "#232323",
-  },
-  title: {
-    fontSize: 50,
-    fontWeight: "bold",
-    color: "#13AD82",
+    width: width * 0.25,
+    height: height * 0.5,
   },
   contentContainer: {
     flex: 1,
-    backgroundColor: "#E2E1E0",
-    gap: 10,
-    paddingTop: 10,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 5,
+    paddingTop: 60,
+    justifyContent: "space-evenly",
   },
   columnCard: {
-    marginHorizontal: 10,
-    marginVertical: 0,
-    width: "auto",
+    height: 120,
+    width: 130,
   },
   dragOver: {
     backgroundColor: "#87CEEB", // Color during drag over

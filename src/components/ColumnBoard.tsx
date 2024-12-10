@@ -1,15 +1,22 @@
+import { useFonts } from "expo-font";
 import { View, StyleSheet, Pressable, Text } from "react-native";
 import Column from "./Column";
 import { DraxView } from "react-native-drax";
 import { useCardContext } from "../context/CardContext";
-import { useEffect } from "react";
 
 export default function ColumnBoard() {
-  const { columns, handleSubmit } = useCardContext();
+  const { columns, handleSubmit, resetCards } = useCardContext();
+  const [loaded, error] = useFonts({
+    HelveticaNeueBold: require("../../assets/fonts/HelveticaNeueBold.otf"),
+  });
+
+  if (!loaded && !error) {
+    return null;
+  }
 
   return (
-    <View>
-      <DraxView style={styles.container}>
+    <View style={styles.container}>
+      <DraxView style={styles.columnContainer}>
         {columns.map((column) => (
           <Column
             key={column.columnId}
@@ -19,24 +26,52 @@ export default function ColumnBoard() {
           ></Column>
         ))}
       </DraxView>
-      <Pressable style={styles.submitButton} onPress={() => handleSubmit()}>
-        <Text style={styles.submitText}>Submit</Text>
-      </Pressable>
+      <View style={styles.buttonContainer}>
+        <Pressable
+          style={styles.resetButton}
+          onPress={() => {
+            resetCards();
+          }}
+        >
+          <Text style={styles.resetText}>RESET</Text>
+        </Pressable>
+        <Pressable style={styles.submitButton} onPress={() => handleSubmit()}>
+          <Text style={styles.submitText}>SUBMIT</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container: { gap: 15 },
+  columnContainer: {
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
+    gap: 40,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 20,
   },
   submitButton: {
+    backgroundColor: "#FF00AB",
+    alignSelf: "center",
+    paddingHorizontal: 50,
+    borderRadius: 10,
+  },
+  submitText: {
+    fontFamily: "HelveticaNeueBold",
+    color: "white",
+    fontSize: 30,
+  },
+  resetButton: {
     backgroundColor: "yellow",
     alignSelf: "center",
     padding: 10,
   },
-  submitText: {
-    fontSize: 40,
+  resetText: {
+    fontSize: 30,
   },
 });
